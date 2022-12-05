@@ -1,37 +1,33 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
+
 import BusinessList from '../BusinessList/BusinessList';
 import SearchBar from '../SearchBar/SearchBar';
-import logo from '../../logo.svg';
-import './App.css';
 
-//cut and pasted in step 3 need to import business?
-const business = {
-	imageSrc: 'https://content.codecademy.com/programs/react/ravenous/pizza.jpg',
-	name: 'Luca Pizzeria',
-	address: '1010 Paddington Way',
-	city: 'Flavortown',
-	state: 'NY',
-	zipCode: '10101',
-	category: 'Italian',
-	rating: 4.5,
-	reviewCount: 90,
-};
-
-//step 4
-const businesses = [business, business, business, business, business, business];
+import Yelp from '../../util/Yelp';
 
 //step 5 businesses={businesses}
-class App extends Component {
+class App extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			businesses: [],
+		};
+		this.searchYelp = this.searchYelp.bind(this);
+	}
 	searchYelp(term, location, sortBy) {
-		console.log(`Searching Yelp with ${term}, ${location} via ${sortBy}`);
+		Yelp.search(term, location, sortBy).then((businesses) => {
+			this.setState({
+				businesses: businesses,
+			});
+		});
 	}
 	render() {
 		return (
 			<div className="App">
 				<h1>ravenous</h1>
 				<SearchBar searchYelp={this.searchYelp} />
-				<BusinessList businesses={businesses} />
+				<BusinessList businesses={this.state.businesses} />
 			</div>
 		);
 	}
