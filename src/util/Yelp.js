@@ -1,5 +1,5 @@
 const apiKey =
-	'ubCZkEotRPrLzGOscx-h-HshhinsQ1vK8iB_XlB6bjmA4u5ufl-1yCHrBJgnKl73-IBUEFtyqYoXCcac_-TelbxJfrH_KjtYtLKJeR6p_1IDMe_5VV-6Kp78V0GKY3Yx';
+	//log into Yelp to see API Key
 	
 const Yelp = {
 	search(term, location, sortBy) {
